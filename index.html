@@ -584,7 +584,6 @@
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <a href="#hero" class="nav-logo">JSP.</a>
   <ul class="nav-links" id="navLinks">
@@ -599,7 +598,6 @@
   </div>
 </nav>
 
-<!-- HERO -->
 <section id="hero">
   <div class="hero-text">
     <p class="hero-eyebrow">Software Developer · Philippines</p>
@@ -613,7 +611,7 @@
       <a href="#experience" class="btn-ghost">View Experience</a>
     </div>
     <div class="hero-contact">
-      <a href="/cdn-cgi/l/email-protection#c9a3a6a3a0acbaa1a8bba0a7acb9a8baa0a6a789aea4a8a0a5e7aaa6a4"><span class="__cf_email__" data-cfemail="69030603000c1a01081b00070c19081a000607290e04080005470a0604">[email&#160;protected]</span></a>
+      <a href="mailto:jojieshar@email.com">jojieshar@email.com</a>
       <a href="tel:+639431360786">(+63) 949-136-0786</a>
     </div>
   </div>
@@ -626,7 +624,6 @@
   </div>
 </section>
 
-<!-- SKILLS -->
 <section id="skills">
   <p class="section-label reveal">Technical Profile</p>
   <h2 class="section-title reveal">Skills &amp; Tools</h2>
@@ -636,24 +633,20 @@
       <p class="skill-card-content">HTML, CSS (Tailwind, Bootstrap), JavaScript (React.JS, Sencha Ext JS)</p>
     </div>
     <div class="skill-card">
-      <p class="skill-card-label">DevOps &amp; Version Control</p>
-      <p class="skill-card-content">AWS, Git, GitHub, GitLab</p>
+      <p class="skill-card-label">Backend &amp; APIs</p>
+      <p class="skill-card-content">PHP, Flutter, C# (ASP.NET), Node.js, MySQL, REST API, Postman</p>
     </div>
     <div class="skill-card">
-      <p class="skill-card-label">CMS</p>
-      <p class="skill-card-content">WordPress</p>
+      <p class="skill-card-label">DevOps &amp; Version Control</p>
+      <p class="skill-card-content">AWS, Git, GitHub, GitLab</p>
     </div>
     <div class="skill-card">
       <p class="skill-card-label">UI/UX Design</p>
       <p class="skill-card-content">Adobe Photoshop, Figma, Balsamiq</p>
     </div>
     <div class="skill-card">
-      <p class="skill-card-label">Backend &amp; APIs</p>
-      <p class="skill-card-content">PHP, Flutter, C# (ASP.NET), Node.js, MySQL, REST API, Postman</p>
-    </div>
-    <div class="skill-card">
-      <p class="skill-card-label">Operating Systems</p>
-      <p class="skill-card-content">Windows</p>
+      <p class="skill-card-label">CMS</p>
+      <p class="skill-card-content">WordPress</p>
     </div>
   </div>
   <div class="workflow-items reveal">
@@ -678,7 +671,6 @@
   </div>
   <div class="projects-grid reveal" id="projectsGrid">
 
-    <!-- Website 1 — images/ui5.png → ordering-system -->
     <div class="project-card" data-type="website" data-link="https://github.com/jojieshar/ordering-system" style="cursor:pointer;">
       <img src="images/ui5.png" alt="Ordering System" />
       <div class="project-overlay">
@@ -686,7 +678,6 @@
       </div>
     </div>
 
-    <!-- Website 2 — images/ui8.png → spendwise -->
     <div class="project-card" data-type="website" data-link="https://github.com/jojieshar/spendwise" style="cursor:pointer;">
       <img src="images/ui8.png" alt="SpendWise" />
       <div class="project-overlay">
@@ -694,7 +685,6 @@
       </div>
     </div>
 
-    <!-- Design 1 — images/ui1.png → Ordering App -->
     <div class="project-card" data-type="design" data-link="https://www.figma.com/design/09tXUigAraYjODbGwBAWuy/Ordering-App?t=E2QJ0J92MaC7Og5f-1" style="cursor:pointer;">
       <img src="images/ui1.png" alt="Design 1 – Ordering App" />
       <div class="project-overlay">
@@ -702,7 +692,6 @@
       </div>
     </div>
 
-    <!-- Design 2 — images/ui4.png → E-commerce -->
     <div class="project-card" data-type="design" data-link="https://www.figma.com/design/X9WPZOijLuJkqUFQ0pVCSY/E-commerce?t=E2QJ0J92MaC7Og5f-1" style="cursor:pointer;">
       <img src="images/ui4.png" alt="Design 2 – E-commerce" />
       <div class="project-overlay">
@@ -710,7 +699,6 @@
       </div>
     </div>
 
-    <!-- Design 3 — images/ui3.png → Natural Bites -->
     <div class="project-card" data-type="design" data-link="https://www.figma.com/design/Y1B34DeMd52Q5gUNKm0wv5/Natural-Bites?t=E2QJ0J92MaC7Og5f-1" style="cursor:pointer;">
       <img src="images/ui3.png" alt="Design 3 – Natural Bites" />
       <div class="project-overlay">
@@ -825,14 +813,12 @@
   <span>Software Developer · Philippines</span>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  // Hamburger toggle
+<script>
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.getElementById('navLinks');
   hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
   navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
 
-  // Scroll reveal
   const revealEls = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => {
@@ -870,7 +856,6 @@
     });
   });
 
-  // Active nav link highlight on scroll
   const sections = document.querySelectorAll('section[id]');
   const navAnchors = document.querySelectorAll('.nav-links a');
   window.addEventListener('scroll', () => {
