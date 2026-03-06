@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Jojie Sharine Pasion — Software Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg2: #111111;
+    --bg3: #181818;
+    --border: #222222;
+    --accent: #c8f542;
+    --accent2: #8bff6b;
+    --text: #f0ede6;
+    --muted: #888;
+    --tag-bg: #1a1a1a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 3rem;
+    height: 64px;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    font-weight: 500;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 22px; height: 1.5px; background: var(--text); display: block; transition: 0.3s; }
+
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 100px 8vw 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #hero::after {
+    content: '';
+    position: absolute;
+    right: -10%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 55vw;
+    height: 55vw;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,245,66,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+
+  .hero-name em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .hero-role {
+    font-size: 1rem;
+    color: var(--muted);
+    margin-bottom: 1.2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.5s forwards;
+    font-weight: 300;
+  }
+
+  .hero-desc {
+    font-size: 0.95rem;
+    color: #aaa;
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.7s forwards;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 0.75rem 1.8rem;
+    background: var(--accent);
+    color: #0a0a0a;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,245,66,0.25); }
+
+  .btn-ghost {
+    display: inline-block;
+    padding: 0.75rem 1.8rem;
+    border: 1px solid var(--border);
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-contact {
+    display: flex;
+    gap: 2rem;
+    margin-top: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.85s forwards;
+  }
+
+  .hero-contact a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-family: 'DM Mono', monospace;
+    transition: color 0.2s;
+  }
+  .hero-contact a:hover { color: var(--accent); }
+
+  .hero-img-wrap {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    opacity: 0;
+    animation: fadeIn 1s 0.6s forwards;
+  }
+
+  .hero-img-frame {
+    position: relative;
+    width: clamp(240px, 28vw, 380px);
+    aspect-ratio: 3/4;
+  }
+
+  .hero-img-frame::before {
+    content: '';
+    position: absolute;
+    inset: -12px -12px 12px 12px;
+    border: 1px solid var(--accent);
+    opacity: 0.4;
+  }
+
+  .hero-img-placeholder {
+    width: 100%;
+    height: 100%;
+    background: var(--bg3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-img-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  section {
+    padding: 100px 8vw;
+    border-top: 1px solid var(--border);
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    margin-bottom: 3.5rem;
+    line-height: 1.1;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5px;
+    background: var(--border);
+  }
+
+  .skill-card {
+    background: var(--bg);
+    padding: 2rem;
+    transition: background 0.3s;
+  }
+  .skill-card:hover { background: var(--bg3); }
+
+  .skill-card-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .skill-card-content {
+    font-size: 0.9rem;
+    color: #bbb;
+    line-height: 1.8;
+  }
+
+  .workflow-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2.5rem;
+  }
+
+  .workflow-tag {
+    padding: 0.5rem 1.2rem;
+    border: 1px solid var(--border);
+    font-size: 0.82rem;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .workflow-tag:hover { border-color: var(--accent); color: var(--accent); }
+
+  .filter-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: 0.5rem 1.4rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #0a0a0a;
+    font-weight: 600;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2px;
+  }
+
+  .project-card {
+    background: var(--bg3);
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s;
+  }
+
+  .project-card.hidden {
+    display: none;
+  }
+
+  .project-card-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--border);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: transform 0.4s;
+  }
+
+  .project-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s;
+  }
+
+  .project-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(200,245,66,0.12);
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .project-card:hover .project-overlay { opacity: 1; }
+  .project-card:hover img { transform: scale(1.06); }
+
+  .exp-list { display: flex; flex-direction: column; gap: 0; }
+
+  .exp-item {
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 0;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 3rem;
+  }
+
+  .exp-company {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    color: var(--text);
+  }
+
+  .exp-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+  }
+
+  .exp-role {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.4rem;
+  }
+
+  .exp-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .exp-bullets li {
+    font-size: 0.88rem;
+    color: #999;
+    display: flex;
+    gap: 0.75rem;
+    line-height: 1.6;
+  }
+
+  .exp-bullets li::before {
+    content: '→';
+    color: var(--accent);
+    flex-shrink: 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    margin-top: 0.1rem;
+  }
+
+  .exp-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .exp-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    padding: 0.3rem 0.7rem;
+    background: var(--tag-bg);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  .edu-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2px;
+    background: var(--border);
+  }
+
+  .edu-card {
+    background: var(--bg);
+    padding: 2.5rem;
+  }
+
+  .edu-school {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .edu-degree {
+    font-size: 0.88rem;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .edu-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+  }
+
+  .certs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .cert-item {
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .cert-item:first-child { border-top: 1px solid var(--border); }
+
+  .cert-name {
+    font-size: 0.88rem;
+    color: #ccc;
+    flex: 1;
+  }
+
+  .cert-issuer {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 8vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s, transform 0.7s;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; flex-direction: column; position: fixed; top: 64px; left: 0; right: 0; background: var(--bg); border-bottom: 1px solid var(--border); padding: 1.5rem; gap: 1.5rem; }
+    .nav-links.open { display: flex; }
+    .hamburger { display: flex; }
+
+    #hero { grid-template-columns: 1fr; padding: 100px 6vw 60px; }
+    .hero-img-wrap { display: none; }
+
+    .exp-item { grid-template-columns: 1fr; gap: 1.5rem; }
+    .edu-grid { grid-template-columns: 1fr; }
+
+    .cert-item { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
+    .cert-issuer { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">JSP.</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#certificates">Certs</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">Software Developer · Philippines</p>
+    <h1 class="hero-name">Jojie <br><em>Sharine Pasion</em></h1>
+    <p class="hero-role">Bachelor of Science in Information Technology</p>
+    <p class="hero-desc">
+      Software Developer with over 2 years of experience in PHP and 6 months of hands-on experience in Flutter. Proficient in developing scalable and responsive applications that deliver reliable, high-performance solutions.
+    </p>
+    <div class="hero-actions">
+      <a href="resume/jojie-resume.pdf" class="btn-primary" download="jojie-resume.pdf">Download Resume</a>
+      <a href="#experience" class="btn-ghost">View Experience</a>
+    </div>
+    <div class="hero-contact">
+      <a href="/cdn-cgi/l/email-protection#c9a3a6a3a0acbaa1a8bba0a7acb9a8baa0a6a789aea4a8a0a5e7aaa6a4"><span class="__cf_email__" data-cfemail="69030603000c1a01081b00070c19081a000607290e04080005470a0604">[email&#160;protected]</span></a>
+      <a href="tel:+639431360786">(+63) 949-136-0786</a>
+    </div>
+  </div>
+  <div class="hero-img-wrap">
+    <div class="hero-img-frame">
+      <div class="hero-img-placeholder">
+        <img src="https://avatars.githubusercontent.com/u/124542241?s=400&u=081b6d053f71d81af5f3c1c01d7491a093771281&v=4" alt="Jojie Sharine Pasion" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label reveal">Technical Profile</p>
+  <h2 class="section-title reveal">Skills &amp; Tools</h2>
+  <div class="skills-grid reveal">
+    <div class="skill-card">
+      <p class="skill-card-label">Frontend</p>
+      <p class="skill-card-content">HTML, CSS (Tailwind, Bootstrap), JavaScript (React.JS, Sencha Ext JS)</p>
+    </div>
+    <div class="skill-card">
+      <p class="skill-card-label">DevOps &amp; Version Control</p>
+      <p class="skill-card-content">AWS, Git, GitHub, GitLab</p>
+    </div>
+    <div class="skill-card">
+      <p class="skill-card-label">CMS</p>
+      <p class="skill-card-content">WordPress</p>
+    </div>
+    <div class="skill-card">
+      <p class="skill-card-label">UI/UX Design</p>
+      <p class="skill-card-content">Adobe Photoshop, Figma, Balsamiq</p>
+    </div>
+    <div class="skill-card">
+      <p class="skill-card-label">Backend &amp; APIs</p>
+      <p class="skill-card-content">PHP, Flutter, C# (ASP.NET), Node.js, MySQL, REST API, Postman</p>
+    </div>
+    <div class="skill-card">
+      <p class="skill-card-label">Operating Systems</p>
+      <p class="skill-card-content">Windows</p>
+    </div>
+  </div>
+  <div class="workflow-items reveal">
+    <span class="workflow-tag">Browser Testing</span>
+    <span class="workflow-tag">Debugging</span>
+    <span class="workflow-tag">Cross-Functional Teams</span>
+    <span class="workflow-tag">Responsive Web Design</span>
+    <span class="workflow-tag">Code Reviews</span>
+    <span class="workflow-tag">PR Management</span>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label reveal">Portfolio</p>
+  <h2 class="section-title reveal">Projects</h2>
+  <div class="filter-tabs reveal">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="website">Website</button>
+    <button class="filter-btn" data-filter="design">Design</button>
+    <button class="filter-btn" data-filter="logo">Logo</button>
+  </div>
+  <div class="projects-grid reveal" id="projectsGrid">
+
+    <!-- Website 1 — images/ui5.png → ordering-system -->
+    <div class="project-card" data-type="website" data-link="https://github.com/jojieshar/ordering-system" style="cursor:pointer;">
+      <img src="images/ui5.png" alt="Ordering System" />
+      <div class="project-overlay">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </div>
+    </div>
+
+    <!-- Website 2 — images/ui8.png → spendwise -->
+    <div class="project-card" data-type="website" data-link="https://github.com/jojieshar/spendwise" style="cursor:pointer;">
+      <img src="images/ui8.png" alt="SpendWise" />
+      <div class="project-overlay">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </div>
+    </div>
+
+    <!-- Design 1 — images/ui1.png → Ordering App -->
+    <div class="project-card" data-type="design" data-link="https://www.figma.com/design/09tXUigAraYjODbGwBAWuy/Ordering-App?t=E2QJ0J92MaC7Og5f-1" style="cursor:pointer;">
+      <img src="images/ui1.png" alt="Design 1 – Ordering App" />
+      <div class="project-overlay">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </div>
+    </div>
+
+    <!-- Design 2 — images/ui4.png → E-commerce -->
+    <div class="project-card" data-type="design" data-link="https://www.figma.com/design/X9WPZOijLuJkqUFQ0pVCSY/E-commerce?t=E2QJ0J92MaC7Og5f-1" style="cursor:pointer;">
+      <img src="images/ui4.png" alt="Design 2 – E-commerce" />
+      <div class="project-overlay">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </div>
+    </div>
+
+    <!-- Design 3 — images/ui3.png → Natural Bites -->
+    <div class="project-card" data-type="design" data-link="https://www.figma.com/design/Y1B34DeMd52Q5gUNKm0wv5/Natural-Bites?t=E2QJ0J92MaC7Og5f-1" style="cursor:pointer;">
+      <img src="images/ui3.png" alt="Design 3 – Natural Bites" />
+      <div class="project-overlay">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label reveal">Work History</p>
+  <h2 class="section-title reveal">Experience</h2>
+  <div class="exp-list">
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <p class="exp-company">Inventi Philippines</p>
+        <p class="exp-period">November 2023 – Present</p>
+        <p class="exp-role">Software Developer</p>
+      </div>
+      <div class="exp-content">
+        <ul class="exp-bullets">
+          <li>Develop and maintain scalable web-based systems using PHP, implementing structured backend logic and RESTful API integration.</li>
+          <li>Design, manage, and optimize relational databases using MySQL.</li>
+          <li>Build and maintain cross-platform mobile applications using Flutter, applying Clean Architecture principles.</li>
+          <li>Create and manage pull requests using AWS CodeCommit.</li>
+          <li>Manage version control using Git, including branching, committing, merging, and resolving conflicts.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">PHP</span><span class="exp-tag">Flutter</span><span class="exp-tag">React JS</span>
+          <span class="exp-tag">MySQL</span><span class="exp-tag">GIT</span><span class="exp-tag">AWS</span>
+          <span class="exp-tag">ZOHO</span><span class="exp-tag">MIRO</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <p class="exp-company">iRely Philippines Inc</p>
+        <p class="exp-period">June – August 2023</p>
+        <p class="exp-role">Junior Application Developer</p>
+      </div>
+      <div class="exp-content">
+        <ul class="exp-bullets">
+          <li>Developed and maintained both frontend and backend components using ASP.NET, implementing scalable architecture and business logic.</li>
+          <li>Designed and integrated RESTful APIs to enable seamless communication between system modules and external services.</li>
+          <li>Built dynamic and data-intensive user interfaces using Sencha Ext JS.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">C#</span><span class="exp-tag">ASP.NET</span><span class="exp-tag">Sencha Ext JS</span>
+          <span class="exp-tag">Microsoft SQL Server</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <p class="exp-company">Fligno Software Philippines</p>
+        <p class="exp-period">January 2023 – April 2023</p>
+        <p class="exp-role">Software Engineer</p>
+      </div>
+      <div class="exp-content">
+        <ul class="exp-bullets">
+          <li>Developed and maintained web applications using Laravel, implementing MVC architecture, RESTful APIs, authentication, and database integration.</li>
+          <li>Designed user interfaces and prototypes using Figma, aligning UI/UX design with system functionality and user requirements.</li>
+          <li>Built and customized website front-end pages using WordPress, implementing themes, plugins, and custom layouts.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">PHP (Laravel)</span><span class="exp-tag">WordPress</span><span class="exp-tag">Flutter</span>
+          <span class="exp-tag">Git</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <p class="section-label reveal">Academic Background</p>
+  <h2 class="section-title reveal">Education</h2>
+  <div class="edu-grid reveal">
+    <div class="edu-card">
+      <p class="edu-school">Divine Word College of Calapan</p>
+      <p class="edu-degree">Bachelor of Science in Information Technology</p>
+      <p class="edu-period">Jun 2019 – May 2023</p>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATES -->
+<section id="certificates">
+  <p class="section-label reveal">Credentials</p>
+  <h2 class="section-title reveal">Certificates</h2>
+  <div class="certs-list reveal">
+    <div class="cert-item">
+      <span class="cert-name">Business Correspondence</span>
+      <span class="cert-issuer">Blockchain Collective – 2023</span>
+    </div>
+    <div class="cert-item">
+      <span class="cert-name">National Certification II – Computer System Servicing</span>
+      <span class="cert-issuer">TESDA Calapan - 2022</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2026 Jojie Sharine D. Pasion</span>
+  <span>Software Developer · Philippines</span>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Hamburger toggle
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // Project card click → open link
+  document.querySelectorAll('.project-card[data-link]').forEach(card => {
+    card.addEventListener('click', () => {
+      window.open(card.dataset.link, '_blank');
+    });
+  });
+
+  // Project filter
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const projectCards = document.querySelectorAll('.project-card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      projectCards.forEach(card => {
+        if (filter === 'all' || card.dataset.type === filter) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+
+  // Active nav link highlight on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navAnchors = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    navAnchors.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
+    });
+  });
+</script>
+</body>
+</html>
