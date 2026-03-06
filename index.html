@@ -268,13 +268,14 @@
   .skills-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.5px;
-    background: var(--border);
+    gap: 0;
+    background: transparent;
   }
 
   .skill-card {
     background: var(--bg);
     padding: 2rem;
+    border: 1px solid var(--border);
     transition: background 0.3s;
   }
   .skill-card:hover { background: var(--bg3); }
