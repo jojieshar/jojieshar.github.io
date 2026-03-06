@@ -267,7 +267,7 @@
 
   .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5px;
     background: var(--border);
   }
@@ -584,6 +584,7 @@
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
   <a href="#hero" class="nav-logo">JSP.</a>
   <ul class="nav-links" id="navLinks">
@@ -598,6 +599,7 @@
   </div>
 </nav>
 
+<!-- HERO -->
 <section id="hero">
   <div class="hero-text">
     <p class="hero-eyebrow">Software Developer · Philippines</p>
@@ -624,6 +626,7 @@
   </div>
 </section>
 
+<!-- SKILLS -->
 <section id="skills">
   <p class="section-label reveal">Technical Profile</p>
   <h2 class="section-title reveal">Skills &amp; Tools</h2>
@@ -814,11 +817,13 @@
 </footer>
 
 <script>
+  // Hamburger toggle
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.getElementById('navLinks');
   hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
   navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
 
+  // Scroll reveal
   const revealEls = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => {
@@ -856,6 +861,7 @@
     });
   });
 
+  // Active nav link highlight on scroll
   const sections = document.querySelectorAll('section[id]');
   const navAnchors = document.querySelectorAll('.nav-links a');
   window.addEventListener('scroll', () => {
